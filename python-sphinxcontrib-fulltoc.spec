@@ -25,6 +25,7 @@ within the document.
 Summary: %{sum}
 BuildRequires: python2-devel
 BuildRequires: python-pbr
+Requires: python-sphinx
 %{?python_provide:%python_provide python2-%{srcname}}
 
 %description -n python2-%{srcname}
@@ -40,6 +41,7 @@ within the document.
 Summary: %{sum}
 BuildRequires: python3-devel
 BuildRequires: python3-pbr
+Requires: python3-sphinx
 %{?python_provide:%python_provide python3-%{srcname}}
 
 %description -n python3-%{srcname}
@@ -69,16 +71,14 @@ find . -name '*.py[co]' -delete
 
 %files -n python2-%{srcname}
 %license LICENSE
-%doc README.rst AUTHORS ChangeLog
-%{python2_sitelib}/sphinxcontrib/*
-%{python2_sitelib}/sphinxcontrib_fulltoc*
+%doc README.rst AUTHORS ChangeLog announce.rst
+%{python2_sitelib}/*
 
 
 %files -n python3-%{srcname}
 %license LICENSE
-%doc README.rst AUTHORS ChangeLog
-%{python3_sitelib}/sphinxcontrib/*
-%{python3_sitelib}/sphinxcontrib_fulltoc*
+%doc README.rst AUTHORS ChangeLog announce.rst
+%{python3_sitelib}/*
 
 
 %changelog
