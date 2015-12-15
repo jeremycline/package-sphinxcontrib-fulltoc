@@ -53,6 +53,22 @@ local headers for the current page are also included in the appropriate place
 within the document.
 
 
+%package -n python-%{srcname}-doc
+Summary: %{sum}
+BuildRequires: python-sphinx
+%{?python_provide:%python_provide python3-%{srcname}}
+
+%description -n python-%{srcname}-doc
+sphinxcontrib-fulltoc is an extension for the Sphinx documentation system that
+changes the HTML output to include a more detailed table of contents in the
+sidebar. By default Sphinx only shows the local headers for the current page.
+With the extension installed, all of the page titles are included, and the
+local headers for the current page are also included in the appropriate place
+within the document.
+
+This package contains the documentation for sphinxcontrib-fulltoc.
+
+
 %prep
 %autosetup -n %{srcname}-%{version}
 rm -r *.egg-info
@@ -62,6 +78,8 @@ find . -name '*.py[co]' -delete
 %build
 %py2_build
 %py3_build
+make -C docs html PYTHONPATH=$(pwd)
+rm docs/build/html/.buildinfo
 
 
 %install
@@ -79,6 +97,11 @@ find . -name '*.py[co]' -delete
 %license LICENSE
 %doc README.rst AUTHORS ChangeLog announce.rst
 %{python3_sitelib}/*
+
+
+%files -n python-%{srcname}-doc
+%license LICENSE
+%doc docs/build/html/*
 
 
 %changelog
