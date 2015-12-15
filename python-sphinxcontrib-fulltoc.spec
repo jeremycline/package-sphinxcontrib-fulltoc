@@ -4,7 +4,7 @@
 
 Name: python-%{srcname}
 Version: 1.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: %{sum}	
 License: ASL 2.0
 URL: https://github.com/dreamhost/%{srcname}
@@ -105,5 +105,8 @@ rm docs/build/html/.buildinfo
 
 
 %changelog
+* Tue Dec 15 2015 Jeremy Cline <jeremy@jcline.org> 1.1-2
+- Added a -doc subpackage
+
 * Sat Dec 12 2015 Jeremy Cline <jeremy@jcline.org> 1.1-1
 - Initial release
