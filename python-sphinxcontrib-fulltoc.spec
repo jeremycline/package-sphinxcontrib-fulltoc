@@ -4,7 +4,7 @@
 
 Name: python-%{srcname}
 Version: 1.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: %{sum}	
 License: ASL 2.0
 URL: https://github.com/dreamhost/%{srcname}
@@ -79,6 +79,7 @@ find . -name '*.py[co]' -delete
 %py2_build
 %py3_build
 make -C docs html PYTHONPATH=$(pwd)
+make -C docs man PYTHONPATH=$(pwd)
 rm docs/build/html/.buildinfo
 
 
@@ -86,16 +87,22 @@ rm docs/build/html/.buildinfo
 %py2_install
 %py3_install
 
+# Install the man pages
+install -p -D -T -m 0644 docs/build/man/%{srcname}.1 %{buildroot}%{_mandir}/man1/python2-%{srcname}.1
+install -p -D -T -m 0644 docs/build/man/%{srcname}.1 %{buildroot}%{_mandir}/man1/python3-%{srcname}.1
+
 
 %files -n python2-%{srcname}
 %license LICENSE
 %doc README.rst AUTHORS ChangeLog announce.rst
+%{_mandir}/man1/python2-%{srcname}.1*
 %{python2_sitelib}/*
 
 
 %files -n python3-%{srcname}
 %license LICENSE
 %doc README.rst AUTHORS ChangeLog announce.rst
+%{_mandir}/man1/python3-%{srcname}.1*
 %{python3_sitelib}/*
 
 
@@ -105,6 +112,9 @@ rm docs/build/html/.buildinfo
 
 
 %changelog
+* Wed Dec 16 2015 Jeremy Cline <jeremy@jcline.org> 1.1-3
+- Added man pages
+
 * Tue Dec 15 2015 Jeremy Cline <jeremy@jcline.org> 1.1-2
 - Added a -doc subpackage
 
